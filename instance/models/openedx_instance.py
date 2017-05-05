@@ -115,10 +115,7 @@ class OpenEdXInstance(LoadBalancedInstance, OpenEdXAppConfiguration, OpenEdXData
 
         Returns external domain if present, otherwise falls back to internal domain.
         """
-        if self.external_lms_domain:
-            return self.external_lms_domain
-        else:
-            return self.internal_lms_domain
+        return self.get_domain('lms')
 
     @property
     def domain_slug(self):
@@ -138,10 +135,20 @@ class OpenEdXInstance(LoadBalancedInstance, OpenEdXAppConfiguration, OpenEdXData
 
     @property
     def discovery_domain(self):
+        """
+        Discovery domain name.
+
+        Returns external discovery domain if present, otherwise falls back to internal discovery domain.
+        """
         return self.get_domain('discovery')
 
     @property
     def ecommerce_domain(self):
+        """
+        Ecommerce domain name.
+
+        Returns external ecommerce domain if present, otherwise falls back to internal ecommerce domain.
+        """
         return self.get_domain('ecommerce')
 
     @property
@@ -151,10 +158,7 @@ class OpenEdXInstance(LoadBalancedInstance, OpenEdXAppConfiguration, OpenEdXData
 
         Returns external preview domain if present, otherwise falls back to internal preview domain.
         """
-        if self.external_lms_preview_domain:
-            return self.external_lms_preview_domain
-        else:
-            return self.internal_lms_preview_domain
+        return self.get_domain('lms_preview')
 
     @property
     def studio_domain(self):
@@ -163,10 +167,7 @@ class OpenEdXInstance(LoadBalancedInstance, OpenEdXAppConfiguration, OpenEdXData
 
         Returns external studio domain if present, otherwise falls back to internal studio domain.
         """
-        if self.external_studio_domain:
-            return self.external_studio_domain
-        else:
-            return self.internal_studio_domain
+        return self.get_domain('studio')
 
     def get_load_balanced_domains(self):
         domain_names = [
